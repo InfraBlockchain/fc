@@ -113,12 +113,12 @@ namespace fc { namespace crypto {
 
    std::string private_key::to_string(const fc::yield_function_t& yield) const
    {
-      auto which = _storage.index();
-
-      if (which == 0) {
-         using default_type = std::variant_alternative_t<0, private_key::storage_type>;
-         return to_wif(std::template get<default_type>(_storage), yield);
-      }
+//      auto which = _storage.index();
+//
+//      if (which == 0) {
+//         using default_type = std::variant_alternative_t<0, private_key::storage_type>;
+//         return to_wif(std::template get<default_type>(_storage), yield);
+//      }
 
       auto data_str = std::visit(base58str_visitor<storage_type, config::private_key_prefix>(yield), _storage);
       return std::string(config::private_key_base_prefix) + "_" + data_str;
